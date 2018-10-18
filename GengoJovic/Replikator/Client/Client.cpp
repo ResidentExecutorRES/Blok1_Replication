@@ -7,6 +7,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include <conio.h>
+#include "ClientData.h"
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT 27016
@@ -52,6 +53,7 @@ int main(int argc, char **argv)
 	serverAddress.sin_port = htons(DEFAULT_PORT);
 	// connect to server specified in serverAddress and socket connectSocket
 
+
 	if (connect(connectSocket, (SOCKADDR*)&serverAddress, sizeof(serverAddress)) == SOCKET_ERROR)
 	{
 		printf("Unable to connect to server.\n");
@@ -65,19 +67,28 @@ int main(int argc, char **argv)
 	if (iResult != NO_ERROR)
 		printf("ioctlsocket failed with error: %dld\n", iResult);
 
-	/*do
-	{*/
-		/*char messageToSend[256];
-		printf("Enter string: ");
-		gets(messageToSend);*/
+	//do
+	//{
+		//char messageToSend[256];
+		printf("Choose a staus: {1 - Open, 0 - Close}\n");
+		char status;
+		do {
+			scanf("%c", &status);
+			//if (status != '0' && status != '1') {
+			//	printf("\nPlease eneter valid value...");
+			//}
+		} while (status != '0' && status != '1');
+		//printf("\suc");
 
-		int messageLength = 104857600; //100Mb
-		//int messageLength = strlen(messageToSend) + 1;
+		//int messageLength = 104857600; //100Mb
+		char *messageToSend = Serialize(status);
+		int messageLength = strlen(messageToSend);
 
 		//iResult = send(connectSocket, messageToSend, (int)strlen(messageToSend) + 1, 0);
 		iResult = Send(connectSocket, (char*)&messageLength, sizeof(int));
 		Sleep(50);
-	    char *messageToSend = (char*)malloc(messageLength);
+	    //char *messageToSend = (char*)malloc(messageLength);
+
 		iResult = Send(connectSocket, messageToSend, messageLength);
 
 		if (iResult == SOCKET_ERROR)
@@ -90,12 +101,12 @@ int main(int argc, char **argv)
 
 		printf("Bytes Sent: %ld\n", iResult);
 
-	/*} while (true);*/
-
+	//} while (true);
+	getch();
 	
 	closesocket(connectSocket);
 	WSACleanup();
-	getchar();
+
 	return 0;
 }
 

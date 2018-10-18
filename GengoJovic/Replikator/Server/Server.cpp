@@ -1,7 +1,7 @@
 #include <ws2tcpip.h>
 #include<stdlib.h>
 #include<stdio.h>
-
+#include "ClientData.h"
 
 
 #define DEFAULT_BUFLEN 512
@@ -68,6 +68,9 @@ int  main(void)
 		WSACleanup();
 		return 1;
 	}
+
+	printf("Server is waiting...");
+
 
 	//unsigned long mode = 1;
 	iResult = ioctlsocket(listenSocket, FIONBIO, &mode);
@@ -136,7 +139,7 @@ int  main(void)
 
 	//if((flags = fcntl(sock_descriptor, F_GETFL, 0))<0)
 
-	printf("Server initialized, waiting for clients.\n");
+	//printf("Server initialized, waiting for clients.\n");
 	int size;
 	char* recvbuf;
 	iResult = Recv(acceptedSocket, (char*)&size, sizeof(int));
@@ -164,7 +167,8 @@ int  main(void)
 	iResult = Recv(acceptedSocket, recvbuf, size);
 	if (iResult > 0)
 	{
-		// printf("Message received from client: %s.\n", recvbuf);
+		 //printf("Message received from client: %s.\n", Deserialize(recv));
+		PrintStruct(Deserialize(recvbuf));
 	}
 
 	else if (iResult == 0)
@@ -288,6 +292,6 @@ int Recv(SOCKET acceptedSocket, char *recvBuffer, int buffLength)
 		buffLength -= i;
 	}
 
-	printf("RECEIVED ALL");
+	printf("\n");
 	return i;
 }

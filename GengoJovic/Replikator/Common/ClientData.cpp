@@ -39,10 +39,10 @@ tm StringToTime(char *data) {
 void PrintStruct(ClientStatus c) {
 	
 	if (c.statusC == 49) {
-		printf("Client status: OPEN.\n");
+		printf("Client status: OPEN. TimeStamp: ");
 	}
 	else {
-		printf("Client status: CLOSE.\n");
+		printf("Client status: CLOSE. TimeStamp: ");
 	}
 
 	printf("%d-%d-%d %d:%d:%d.000", c.timeStamp.tm_year,

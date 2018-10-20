@@ -132,12 +132,14 @@
   <ItemGroup>
     <ClInclude Include="CircularBuffer.h" />
     <ClInclude Include="ClientData.h" />
-    <ClInclude Include="List.h" />
+    <ClInclude Include="TCPFunctions.h" />
+    <ClInclude Include="Threads.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircularBuffer.cpp" />
     <ClCompile Include="ClientData.cpp" />
-    <ClCompile Include="List.cpp" />
+    <ClCompile Include="TCPFunctions.cpp" />
+    <ClCompile Include="Threads.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

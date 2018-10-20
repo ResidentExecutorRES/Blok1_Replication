@@ -7,13 +7,13 @@
 #define MAX_BUFF_SIZE 10240
 #define MIN_BUFF_SIZE 10
 
-
 typedef struct {
 	ClientStatus *buffer;
 	int pushIdx;
 	int popIdx;
 	int count;
 	int bufferSize;
+	CRITICAL_SECTION criticalSection;
 } CBuffer;
 
 void InitializeBuffer(CBuffer **buffer, int bufferSize);
